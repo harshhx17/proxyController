@@ -3,55 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>A-Frame Potree Loader Component - Basic</title>
-    <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-potree-loader-component/dist/aframe-potree-loader-component.min.js"></script> -->
-    <script src="https://aframe.io/releases/0.1.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-potree-loader-component/dist/aframe-potree-loader-component.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-gamepad-controls/v0.3.5/dist/aframe-gamepad-controls.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-keyboard-controls/v0.2.3/dist/aframe-keyboard-controls.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-proxy-controls/v0.5.5/dist/aframe-proxy-controls.min.js"></script>
-    <script>
-        var scene = document.querySelector('a-scene'),
-            proxyUrl = location.protocol + '//' + location.host;
-        scene.setAttribute('proxy-controls', {proxyUrl: proxyUrl, enableOverlay: false});
-        scene.addEventListener('proxycontrols.paircode', function (e) {
-          var pairCode = e.detail.pairCode,
-              overlay = document.querySelector('.intro-overlay'),
-              overlayLink = document.querySelector('.intro-overlay-link');
-          overlay.querySelector('[data-bind=pairCode]').textContent = pairCode;
-          overlay.style.display = '';
-          overlayLink.addEventListener('click', function () { overlay.remove(); });
-        });
-      </script>
-      <style>
-            .intro-overlay {
-              z-index: 1;
-              position: absolute;
-              top: 20px;
-              left: 20px;
-              max-width: 280px;
-              box-sizing: border-box;
-              padding: 1.5em;
-              color: #FFF;
-              background: #222;
-              font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
-            }
-            .intro-overlay-link {
-              display: inline-block;
-              float: right;
-              padding: 0.3em 1em 0.35em;
-              margin-top: 1em;
-              text-decoration: none;
-              color: #fff;
-              background: #333;
-            }
-              .intro-overlay-link:hover { background: #444; }
-            @media screen and (min-width: 550px) {
-              .intro-overlay { max-width: 450px; }
-            }
-          </style>
   </head>
   <body>
-      <a-scene>
+      <a-scene proxy-controls>
         <!-- <a-entity potree-loader="
             src: https://cdn.rawgit.com/potree/potree/develop/pointclouds/lion_takanawa;
             pointBudget: 1;
@@ -62,15 +20,9 @@
             position="-1 -5 -5"
             rotation="-85 0 0"
           ></a-entity> -->
-        <a-box> </a-box>
-        <a-entity id="rig" gamepad-controls position="0 0 0">
+          <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow="" material="" geometry=""></a-box>        <a-entity id="rig" gamepad-controls keyboard-controls position="0 0 0">
             <a-entity camera position="0 1.6 0"></a-entity>
-        </a-entity>
+          </a-entity>
       </a-scene>
-      <div class="intro-overlay" style="display: none;">
-            <p>Move around with WASD keys, ←↑→↓, or a USB gamepad.</p>
-            <p>Pair code: “<span data-bind="pairCode"></span>”</p>
-            <div><a href="javascript:void(0)" class="intro-overlay-link">Got it!</a></div>
-      </div>
   </body>
 </html>
