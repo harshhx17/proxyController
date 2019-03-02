@@ -5,12 +5,12 @@
     <title>A-Frame Potree Loader Component - Basic</title>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-potree-loader-component/dist/aframe-potree-loader-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-gamepad-controls/v0.3.5/dist/aframe-gamepad-controls.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-keyboard-controls/v0.2.3/dist/aframe-keyboard-controls.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-proxy-controls/v0.5.5/dist/aframe-proxy-controls.min.js"></script>
   </head>
   <body>
       <a-scene proxy-controls>
-        <!-- <a-entity potree-loader="
+        <a-entity potree-loader="
             src: https://cdn.rawgit.com/potree/potree/develop/pointclouds/lion_takanawa;
             pointBudget: 1;
             pointSize: 1;
@@ -18,11 +18,12 @@
             minimumNodePixelSize: 100;
             "
             position="-1 -5 -5"
-            rotation="-85 0 0"
-          ></a-entity> -->
-          <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow="" material="" geometry=""></a-box>        <a-entity id="rig" gamepad-controls keyboard-controls position="0 0 0">
-            <a-entity camera position="0 1.6 0"></a-entity>
-          </a-entity>
+            rotation="-85 0 0">
+        </a-entity>
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow="" material="" geometry=""></a-box> 
+        <a-entity id="rig" keyboard-controls position="0 0 0">
+          <a-entity camera position="0 1.6 0"></a-entity>
+        </a-entity>
       </a-scene>
   </body>
 </html>
