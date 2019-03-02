@@ -3,63 +3,56 @@
   <head>
     <meta charset="utf-8">
     <title>A-Frame Potree Loader Component - Basic</title>
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-potree-loader-component/dist/aframe-potree-loader-component.min.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-potree-loader-component/dist/aframe-potree-loader-component.min.js"></script> -->
+    <script src="https://aframe.io/releases/0.1.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-gamepad-controls/v0.3.5/dist/aframe-gamepad-controls.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-keyboard-controls/v0.2.3/dist/aframe-keyboard-controls.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-proxy-controls/v0.5.5/dist/aframe-proxy-controls.min.js"></script>
     <script>
-      // window.addEventListener("keydown", (e) => {
-      //    var player = document.getElementById("camera")
-      //    console.log(e.code)
-      //    if (e.code === "KeyR") {
-      //         var angle = player.getElementById("camera")
-      //         var x = 1 * Math.cos(angle.y * Math.PI / 180)
-      //         var y = 1 * Math.sin(angle.y * Math.PI / 180)
-      //         var pos = player.getAttribute("position")
-      //         pos.x -= y;
-      //         pos.z -= x;
-      //         player.setAttribute("position", pos);
-      //     }
-      //     if (e.code === "KeyQ") {
-      //         player.setAttribute("position", {x:0, y:1.6, z:0})
-      //     }
-      // })
-      // document.addEventListener('backbutton', function (){
-      //     var player = document.getElementById("camera")
-      //     var playerWrapper = document.getElementById("rig")
-      //     var angle = player.getAttribute("rotation")
-      //     var x = 1 * Math.cos(angle.y * Math.PI / 180)
-      //     var y = 1 * Math.sin(angle.y * Math.PI / 180)
-      //     // console.log(x)
-      //     var pos = playerWrapper.getAttribute("position")
-      //     let newPos = {x:pos.x + y, y: pos.y, z: pos.z + x};
-      //     playerWrapper.setAttribute("position", newPos);
-      //     return false;     // cancel default menu
-      //   });
-      // window.addEventListener("beforeunload", (e) => {
-      //   alert("Yo fellas");
-      //   return null;
-      // })
-      // window.addEventListener("click", (e) => {
-      //     console.log(e.which)
-      //     var player = document.getElementById("camera")
-      //     var playerWrapper = document.getElementById("rig")
-      //     var angle = player.getAttribute("rotation")
-      //     var x = 1 * Math.cos(angle.y * Math.PI / 180)
-      //     var y = 1 * Math.sin(angle.y * Math.PI / 180)
-      //     // console.log(x)
-      //     var pos = playerWrapper.getAttribute("position")
-      //     let newPos = {x:pos.x - y, y: pos.y, z: pos.z - x};
-      //     playerWrapper.setAttribute("position", newPos);
-      // })
-    //   scene.addEventListener('proxycontrols.paircode', function (e) {
-    //     console.log(e.detail.pairCode);
-    //   });
-    </script>
+        var scene = document.querySelector('a-scene'),
+            proxyUrl = location.protocol + '//' + location.host;
+        scene.setAttribute('proxy-controls', {proxyUrl: proxyUrl, enableOverlay: false});
+        scene.addEventListener('proxycontrols.paircode', function (e) {
+          var pairCode = e.detail.pairCode,
+              overlay = document.querySelector('.intro-overlay'),
+              overlayLink = document.querySelector('.intro-overlay-link');
+          overlay.querySelector('[data-bind=pairCode]').textContent = pairCode;
+          overlay.style.display = '';
+          overlayLink.addEventListener('click', function () { overlay.remove(); });
+        });
+      </script>
+      <style>
+            .intro-overlay {
+              z-index: 1;
+              position: absolute;
+              top: 20px;
+              left: 20px;
+              max-width: 280px;
+              box-sizing: border-box;
+              padding: 1.5em;
+              color: #FFF;
+              background: #222;
+              font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
+            }
+            .intro-overlay-link {
+              display: inline-block;
+              float: right;
+              padding: 0.3em 1em 0.35em;
+              margin-top: 1em;
+              text-decoration: none;
+              color: #fff;
+              background: #333;
+            }
+              .intro-overlay-link:hover { background: #444; }
+            @media screen and (min-width: 550px) {
+              .intro-overlay { max-width: 450px; }
+            }
+          </style>
   </head>
   <body>
       <a-scene>
- 
-<!--         <a-sky color="blue"></a-sky> -->
-        <a-entity potree-loader="
+        <!-- <a-entity potree-loader="
             src: https://cdn.rawgit.com/potree/potree/develop/pointclouds/lion_takanawa;
             pointBudget: 1;
             pointSize: 1;
@@ -68,56 +61,16 @@
             "
             position="-1 -5 -5"
             rotation="-85 0 0"
-          ></a-entity>
-<!--           <a-entity geometry="primitive: plane; height: 500; width: 500"
-          position="0 -5.5 0"
-          rotation="-90 0 0"
-          material="shader: flat; src: https://i.imgur.com/JE0jLfM.jpg; repeat: 300 300"></a-entity> -->
-<!--           <a-box src="https://www.w3schools.com/w3css/img_lights.jpg" position="-1 0.5 -3"></a-box> -->
-<!--           <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-          <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-          <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-          <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
-<!--          <a-entity cursor="downEvents: gamepadbuttondown; upEvents: gamepadbuttonup;">
-              <a-camera></a-camera>
-        </a-entity> -->
-<!--         <a-scene camera proxy-controls="enabled: true;
-                                debug: true;
-                                pairCode: 'my-secret-code';
-                                enableOverlay: false;"> -->
-
-  <!-- scene content -->                                 
-<!-- </a-scene> -->
-                                 
-<a-entity id="rig"
-proxy-controls="enabled: true;
-debug: true;
-pairCode: 'my-secret-code';
-enableOverlay: false;"
-          position="0 0 0">
-  <a-entity camera
-            position="0 1.6 0" gamepad-controls
-           keyboard-controls ></a-entity>
-</a-entity>
-
-        
-        
-        <!-- <a-entity id="rig"
-          wasd-controls
-          position="0 0 0">
-        <a-camera id="camera" position="0 1.6 0"></a-camera> --> -->
-<!-- </a-entity>
-
-        
-        
-        
-        
-                     <a-entity id="rig" movement-controls position="0 0 0">
-            </a-entity>
-         -->
-<!--         <a-camera></a-camera> -->
-        </a-scene>
- 
-<!--       <a-entity position="0 1.6 0" camera movement-controls="controls: touch" look-controls wasd-controls="fly: true"></a-entity> -->
+          ></a-entity> -->
+        <a-box> </a-box>
+        <a-entity id="rig" gamepad-controls position="0 0 0">
+            <a-entity camera position="0 1.6 0"></a-entity>
+        </a-entity>
+      </a-scene>
+      <div class="intro-overlay" style="display: none;">
+            <p>Move around with WASD keys, ←↑→↓, or a USB gamepad.</p>
+            <p>Pair code: “<span data-bind="pairCode"></span>”</p>
+            <div><a href="javascript:void(0)" class="intro-overlay-link">Got it!</a></div>
+      </div>
   </body>
 </html>
